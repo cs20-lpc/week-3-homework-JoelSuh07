@@ -24,4 +24,25 @@ int main()
 {
   // TO DO: Insert your code to display a menu for user to select to add/delete/view Student and course information.
 
+    // Create the head of the student list
+    Student* studentHead = new Student(1, "Alice", 4);
+    
+    // Create a second student and link them
+    Student* secondStudent = new Student(2, "Bob", 3);
+    studentHead->setNext(secondStudent);
+    secondStudent->setPrev(studentHead);
+
+    // Add courses to Alice
+    studentHead->addCourse("CS101", 101);
+    studentHead->addCourse("Math202", 305);
+
+    // Print Alice's info
+    studentHead->printStudent();
+
+    // Cleanup: You'll need to loop through students and delete them
+    delete studentHead; 
+    delete secondStudent;
+    
+
+    return 0;
 }

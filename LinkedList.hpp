@@ -15,14 +15,11 @@ class LinkedList : public List<T> {
             Node* prev;
 
 
-            Node(T v , Node* n = nullptr, Node* p = nullptr)
+            Node(T v = T(), Node* n = nullptr, Node* p = nullptr)
             : value(v), next(n), prev(p) { }
 
-            Node(T v = T(), Node* n =nullptr){
-                value = v;
-                next = n;
-            }
-        };
+            };
+
 
         // a pointer to the front of the list
         Node* head;
@@ -43,6 +40,8 @@ class LinkedList : public List<T> {
         // return the element at the given position (argument)
         virtual T getElement(int) const override;
 
+        virtual T* searchById(int) const override;
+
         // return the current length of the list
         virtual int getLength() const override;
 
@@ -61,8 +60,8 @@ class LinkedList : public List<T> {
         virtual void replace(int, const T&) override;
 
         // overloaded stream insertion operator to make printing easier
-        template <typename U>
-        friend ostream& operator<<(ostream&, const LinkedList<U>&);
+        template <typename T>
+        friend ostream& operator<<(ostream&, const LinkedList<T>&);
 };
 
 #include "LinkedList.tpp"

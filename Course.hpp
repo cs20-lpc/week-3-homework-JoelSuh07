@@ -7,27 +7,20 @@ using namespace std;
 
 class Course{
     private:
-        string name;
+        string courseName;
         int location;
         Course* nextCourse;
 
     public:
 
         // default constructor
-        Course(string name, int location);
+        Course() : courseName(""), location() {}
+        Course(string name, int loc) : courseName(name), location(loc) {}
 
         // destructor
         ~Course() { };
 
-        //Getters
-        string getName() const;
-        int getLocation() const;
-        Course* getNextCourse() const;
-
-        //Setters
-        void setNext(Course* nextCourse);
-
-}
+};
 
 
 

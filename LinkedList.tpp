@@ -64,6 +64,18 @@ T LinkedList<T>::getElement(int position) const {
 }
 
 template <typename T>
+T* LinkedList<T>::searchById(int id) const {
+    Node* current = head;
+    while (current != nullptr){
+        if (current -> value.getId() == id){
+            return &(current -> value);
+        }
+        current = current -> next;
+        }
+        return nullptr;
+    }
+
+template <typename T>
 int LinkedList<T>::getLength() const {
     return this->length;
 }
@@ -160,6 +172,7 @@ ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) { //a displa
         outStream << "List is empty, no elements to display.\n";
     }
     else {
+        
         typename LinkedList<T>::Node* curr = myObj.head;
         while (curr != nullptr) {
             outStream << curr->value;

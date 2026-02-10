@@ -2,6 +2,7 @@
 #ifndef STUDENT_HPP
 #define STUDENT_HPP
 
+#include "Course.hpp"
 #include <string>
 using namespace std;
 
@@ -9,28 +10,28 @@ class Student {
     private:
         int id;
         string name;
-        int gpa;
+        double gpa;
         int length;
-        Course* coursesHead;
+        Course* courseHead;
+
+        Student* nextStudent;
+        Student* prevStudent;
 
     public:
         // default constructor
-        Student(int id, string name, int gpa, LinkedList<string> courses);
+        Student();
+        Student(int id, string name, double gpa);
+
+        Student(const Student& other);
+        Student& operator=(const Student& other);
 
         // destructor
-        ~Student() { }
+        ~Student();
 
-        // add the argument to the end of the list
-        void addStudent(const T&);
-
-        // return the element at the given position (argument)
-        T getStudent(int) const;
-
-        // return the current length of the list
-        int getLength() const;
-
-        // remove the element at the given position (argument)
-        void remove(int);
+        int getId() const {return id;}
+        void addCourse(string cName, string cloc);
+        void display() const;
+    
 };
 
 
