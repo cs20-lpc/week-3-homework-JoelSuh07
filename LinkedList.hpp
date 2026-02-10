@@ -61,9 +61,23 @@ class LinkedList : public List<T> {
         virtual void replace(int, const T&) override;
 
         // overloaded stream insertion operator to make printing easier
-        template <typename U>
-        friend ostream& operator<<(ostream& os, const LinkedList<U>& list);
-
+friend ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) {
+        if (myObj.isEmpty()) {
+            outStream << "List is empty, no elements to display.\n";
+        } else {
+            // We use typename here because Node is a dependent type
+            typename LinkedList<T>::Node* curr = myObj.head;
+            while (curr != nullptr) {
+                outStream << curr->value; // Calls Student's operator<<
+                if (curr->next != nullptr) {
+                    outStream << " --> ";
+                }
+                curr = curr->next;
+            }
+            outStream << endl;
+        }
+        return outStream;
+    }
 
         virtual T* searchById(int id) const override;
 };

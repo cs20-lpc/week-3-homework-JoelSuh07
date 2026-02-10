@@ -153,7 +153,7 @@ void LinkedList<T>::replace(int position, const T& elem) {
     }
     throw out_of_range ("Position out of bounds.");
 }
-
+/*
 template <typename T>
 ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) { //a display function 
     if (myObj.isEmpty()) {
@@ -173,7 +173,7 @@ ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) { //a displa
 
     return outStream;
 }
-
+*/
 template <typename T>
 T* LinkedList<T>::searchById(int id) const {
     Node* current = head;
