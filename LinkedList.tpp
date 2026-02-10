@@ -1,6 +1,7 @@
 template <typename T>
-LinkedList<T>::LinkedList()
-: head(nullptr) { }
+LinkedList<T>::LinkedList() : head(nullptr) {
+    this -> length = 0;
+ }
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
@@ -153,27 +154,7 @@ void LinkedList<T>::replace(int position, const T& elem) {
     }
     throw out_of_range ("Position out of bounds.");
 }
-/*
-template <typename T>
-ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) { //a display function 
-    if (myObj.isEmpty()) {
-        outStream << "List is empty, no elements to display.\n";
-    }
-    else {
-        typename LinkedList<T>::Node* curr = myObj.head;
-        while (curr != nullptr) {
-            outStream << curr->value;
-            if (curr->next != nullptr) {
-                outStream << " --> ";
-            }
-            curr = curr->next;
-        }
-        outStream << endl;
-    }
 
-    return outStream;
-}
-*/
 template <typename T>
 T* LinkedList<T>::searchById(int id) const {
     Node* current = head;

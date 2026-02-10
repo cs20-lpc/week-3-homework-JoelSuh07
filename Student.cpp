@@ -22,7 +22,13 @@ void Student::display() const {
 }
 
 ostream& operator<<(ostream& os, const Student& s) {
-    os << "{ID: " << s.id << ", Name: " << s.name << "}";
+    os << "ID: " << s.id << " | Name: " << s.name << " | GPA: " << s.gpa << "\n  Courses: ";
+    CourseNode* curr = s.coursesHead;
+    if (!curr) os << "None";
+    while (curr) {
+        os << curr->data << " "; // This calls Course's operator<<
+        curr = curr->next;
+    }
     return os;
 }
 

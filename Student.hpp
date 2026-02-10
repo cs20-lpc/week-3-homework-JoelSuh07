@@ -15,9 +15,6 @@ class Student {
         
         CourseNode* coursesHead; //head of the singly linked list of courses
 
-        Student* nextStudent;
-        Student* prevStudent;
-
     public:
         // constructor
         
