@@ -6,10 +6,10 @@
 using namespace std;
 
 class Course{
-    private:
+    protected:
         string courseName;
         int location;
-        Course* nextCourse;
+
 
     public:
 
@@ -20,6 +20,13 @@ class Course{
         // destructor
         ~Course() { };
 
+
+};
+
+struct CourseNode {
+    Course data;
+    CourseNode* next;
+    CourseNode(string name, string loc) : data(name, loc), next(nullptr) {}
 };
 
 

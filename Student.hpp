@@ -7,31 +7,52 @@
 using namespace std;
 
 class Student {
-    private:
+    protected:
         int id;
         string name;
         double gpa;
         int length;
-        Course* courseHead;
+        
+        CourseNode* coursesHead;
 
         Student* nextStudent;
         Student* prevStudent;
 
     public:
-        // default constructor
-        Student();
-        Student(int id, string name, double gpa);
-
-        Student(const Student& other);
-        Student& operator=(const Student& other);
+        // constructor
+        
+        Student(int i = 0, string n ="", double gpa = 0.0)
+            : id(i), name(n), gpa(g), coursesHead(nullptr) {}
 
         // destructor
-        ~Student();
+        ~Student(){
+            while (coursesHead) {
+                CourseNode* temp = coursesHead;
+                coursesHead = coursesHead -> next;
+                delete temp;
+            }
+        };
 
         int getId() const {return id;}
-        void addCourse(string cName, string cloc);
+        void addCourse(string cName, string loc) {
+            CourseNode* newNode = new CourseNode (cName, loc);
+            newNode -> next = coursesHead;
+            coursesHead = newNode;
+        }
         void display() const;
-    
+
+        // Required so that LinkedList's operator<< works
+        friend std::ostream& operator<<(std::ostream& os, const Student& s) {
+            os << "{ID: " << s.id << ", Name: " << s.name << ", GPA: " << s.gpa << " | Courses: ";
+            CourseNode* curr = s.coursesHead;
+            if (!curr) os << "None";
+            while (curr) {
+                os << curr->data << " ";
+                curr = curr->next;
+            }
+            os << "}";
+            return os;
+        }
 };
 
 

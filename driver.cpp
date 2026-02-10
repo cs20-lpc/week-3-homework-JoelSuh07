@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Student.hpp"
-#include "Course.hpp"
+#include "LinkedList.hpp"
 // TO DO:
 // If you want to use the LinkedList code you wrote in Week 4 Mon Lab for creating list
 // include LinkedList.hpp here and also add it both LinkedList.hpp and LinkedList.tpp to this repository.
@@ -23,26 +23,48 @@ void printMenu() {
 int main()
 {
   // TO DO: Insert your code to display a menu for user to select to add/delete/view Student and course information.
+    LinkedList<Student> studentList;
+    int choice, id;
+    string name, cName, loc;
+    double gpa;
 
-    // Create the head of the student list
-    Student* studentHead = new Student(1, "Alice", 4);
-    
-    // Create a second student and link them
-    Student* secondStudent = new Student(2, "Bob", 3);
-    studentHead->setNext(secondStudent);
-    secondStudent->setPrev(studentHead);
 
-    // Add courses to Alice
-    studentHead->addCourse("CS101", 101);
-    studentHead->addCourse("Math202", 305);
+    while (true) {
+    printMenu();
+      cin >> choice;
+      if (choice == 0) break;
 
-    // Print Alice's info
-    studentHead->printStudent();
-
-    // Cleanup: You'll need to loop through students and delete them
-    delete studentHead; 
-    delete secondStudent;
-    
-
+  try {
+    if (choice == 1) {
+        cout << "Enter ID, Name, GPA: ";
+        cin >> id >> name >> gpa;
+        studentList.append(Student(id, name, gpa));
+    } else if (choice == 2) {
+        int pos;
+        cout << "Enter position to remove: "; cin >> pos;
+        studentList.remove(pos);
+    } else if (choice == 3) {
+        cout << "Enter ID: "; cin >> id;
+        Student* s = studentList.searchById(id);
+        if (s) cout << *s << endl;
+        else cout << "Student not found." << endl;
+    } else if (choice == 4) {
+        cout << studentList; // Uses your overloaded operator<<
+    } else if (choice == 5) {
+        cout << "Total Students: " << studentList.getLength() << endl;
+    } else if (choice == 6) {
+        cout << "Enter Student ID: "; cin >> id;
+        Student* s = studentList.searchById(id);
+        if (s) {
+            cout << "Enter Course Name and Location: ";
+            cin >> cName >> loc;
+            s->addCourse(cName, loc);
+        } else cout << "Student not found." << endl;
+    }
+} catch (const exception& e) {
+    cout << "Error: " << e.what() << endl;
+}
+}
+}
     return 0;
 }

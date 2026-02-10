@@ -23,8 +23,6 @@ class List {
         // return the element at the given position (argument)
         virtual T getElement(int) const = 0;
 
-        virtual T* searchById(int) const = 0;
-
         // return the current length of the list
         virtual int getLength() const = 0;
 
@@ -41,6 +39,8 @@ class List {
         // replace the element at the given position (argument 1) with
         // the value given (argument 2)
         virtual void replace(int, const T&) = 0;
+
+        virtual T* searchById(int) = 0;
 };
 
 #endif
