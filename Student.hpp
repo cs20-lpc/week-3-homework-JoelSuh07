@@ -3,7 +3,7 @@
 #define STUDENT_HPP
 
 #include "Course.hpp"
-#include <string>
+#include <iostream>
 using namespace std;
 
 class Student {
@@ -13,7 +13,7 @@ class Student {
         double gpa;
         int length;
         
-        CourseNode* coursesHead;
+        CourseNode* coursesHead; //head of the singly linked list of courses
 
         Student* nextStudent;
         Student* prevStudent;
@@ -22,7 +22,7 @@ class Student {
         // constructor
         
         Student(int i = 0, string n ="", double gpa = 0.0)
-            : id(i), name(n), gpa(g), coursesHead(nullptr) {}
+            : id(i), name(n), gpa(gpa), coursesHead(nullptr) {}
 
         // destructor
         ~Student(){
@@ -34,26 +34,15 @@ class Student {
         };
 
         int getId() const {return id;}
-        void addCourse(string cName, string loc) {
-            CourseNode* newNode = new CourseNode (cName, loc);
-            newNode -> next = coursesHead;
-            coursesHead = newNode;
-        }
+        
+        void addCourse(string cName, int loc);
+
         void display() const;
 
-        // Required so that LinkedList's operator<< works
-        friend std::ostream& operator<<(std::ostream& os, const Student& s) {
-            os << "{ID: " << s.id << ", Name: " << s.name << ", GPA: " << s.gpa << " | Courses: ";
-            CourseNode* curr = s.coursesHead;
-            if (!curr) os << "None";
-            while (curr) {
-                os << curr->data << " ";
-                curr = curr->next;
-            }
-            os << "}";
-            return os;
-        }
+        // Overloaded for studentList display
+        friend ostream& operator<<(ostream& os, const Student& s);
 };
+
 
 
 

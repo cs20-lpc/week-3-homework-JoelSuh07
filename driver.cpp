@@ -24,8 +24,8 @@ int main()
 {
   // TO DO: Insert your code to display a menu for user to select to add/delete/view Student and course information.
     LinkedList<Student> studentList;
-    int choice, id;
-    string name, cName, loc;
+    int choice, id, loc;
+    string name, cName;
     double gpa;
 
 
@@ -65,6 +65,6 @@ int main()
     cout << "Error: " << e.what() << endl;
 }
 }
-}
-    return 0;
-}
+return 0;
+};
+    

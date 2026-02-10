@@ -40,7 +40,7 @@ class List {
         // the value given (argument 2)
         virtual void replace(int, const T&) = 0;
 
-        virtual T* searchById(int) = 0;
+        virtual T* searchById(int) const = 0;
 };
 
 #endif

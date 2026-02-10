@@ -61,8 +61,8 @@ class LinkedList : public List<T> {
         virtual void replace(int, const T&) override;
 
         // overloaded stream insertion operator to make printing easier
-        template <typename T>
-        ostream& operator<<(ostream&, const LinkedList<T>&);
+        template <typename U>
+        friend ostream& operator<<(ostream& os, const LinkedList<U>& list);
 
 
         virtual T* searchById(int id) const override;

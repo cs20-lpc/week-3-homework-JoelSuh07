@@ -179,7 +179,7 @@ T* LinkedList<T>::searchById(int id) const {
     Node* current = head;
     while (current != nullptr) {
         // This assumes the type T (Student) has an 'id' member
-        if (current->value.id == id) {
+        if (current->value.getId() == id) {
             return &(current->value);
         }
         current = current->next;

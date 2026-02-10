@@ -6,12 +6,9 @@
 using namespace std;
 
 class Course{
-    protected:
+    public:
         string courseName;
         int location;
-
-
-    public:
 
         // default constructor
         Course() : courseName(""), location() {}
@@ -26,10 +23,10 @@ class Course{
 struct CourseNode {
     Course data;
     CourseNode* next;
-    CourseNode(string name, string loc) : data(name, loc), next(nullptr) {}
+    CourseNode(string name, int loc) : data(name, loc), next(nullptr) {}
 };
 
-
+ostream& operator<<(ostream& os, const Course& c);
 
 
 #endif
