@@ -31,6 +31,10 @@ class Student {
         };
 
         int getId() const {return id;}
+
+        string getName() const {return name;}
+
+        double getGpa() const {return gpa;}
         
         void addCourse(string cName, int loc);
 

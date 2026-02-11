@@ -56,6 +56,9 @@ class LinkedList : public List<T> {
         // remove the element at the given position (argument)
         virtual void remove(int) override;
 
+        virtual void removeById(int id) override;
+
+
         // replace the element at the given position (argument 1) with
         // the value given (argument 2)
         virtual void replace(int, const T&) override;

@@ -1,7 +1,6 @@
 template <typename T>
-LinkedList<T>::LinkedList() : head(nullptr) {
-    this -> length = 0;
- }
+LinkedList<T>::LinkedList()
+: head(nullptr) { }
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
@@ -110,6 +109,7 @@ bool LinkedList<T>::isEmpty() const {
     return this->length == 0;
 }
 
+
 template <typename T>
 void LinkedList<T>::remove(int position){
     // TODO added by myself
@@ -129,6 +129,44 @@ void LinkedList<T>::remove(int position){
     delete current;
     return;
     }
+
+
+template <typename T>
+void LinkedList<T>::removeById(int id){
+    // TODO added by myself
+    if (head == nullptr) {
+        throw out_of_range("List is empty.");
+    }
+    
+    Node* current = head;
+    
+    // Find the student with the given ID
+    while (current != nullptr) {
+        if (current->value.getId() == id) {
+            // Found the student - remove this node
+            if (current->prev == nullptr) {
+                // It's the first node
+                head = current->next;
+                if (head != nullptr) {
+                    head->prev = nullptr;
+                }
+            } else {
+                // Middle or last node
+                current->prev->next = current->next;
+                if (current->next != nullptr) {
+                    current->next->prev = current->prev;
+                }
+            }
+            
+            --this->length;
+            delete current;
+            return;
+        }
+        current = current->next;
+    }
+    
+    throw out_of_range("Student with ID " + to_string(id) + " not found.");
+}
 
 template <typename T>
 void LinkedList<T>::replace(int position, const T& elem) {
@@ -154,7 +192,27 @@ void LinkedList<T>::replace(int position, const T& elem) {
     }
     throw out_of_range ("Position out of bounds.");
 }
+/*
+template <typename T>
+ostream& operator<<(ostream& outStream, const LinkedList<T>& myObj) { //a display function 
+    if (myObj.isEmpty()) {
+        outStream << "List is empty, no elements to display.\n";
+    }
+    else {
+        typename LinkedList<T>::Node* curr = myObj.head;
+        while (curr != nullptr) {
+            outStream << curr->value;
+            if (curr->next != nullptr) {
+                outStream << " --> ";
+            }
+            curr = curr->next;
+        }
+        outStream << endl;
+    }
 
+    return outStream;
+}
+*/
 template <typename T>
 T* LinkedList<T>::searchById(int id) const {
     Node* current = head;

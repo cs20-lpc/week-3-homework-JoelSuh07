@@ -28,43 +28,108 @@ int main()
     string name, cName;
     double gpa;
 
-
     while (true) {
-    printMenu();
-      cin >> choice;
-      if (choice == 0) break;
+        printMenu();
+        if (!(cin >> choice)){
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
 
-  try {
-    if (choice == 1) {
-        cout << "Enter ID, Name, GPA: ";
-        cin >> id >> name >> gpa;
-        studentList.append(Student(id, name, gpa));
-    } else if (choice == 2) {
-        int pos;
-        cout << "Enter position to remove: "; cin >> pos;
-        studentList.remove(pos);
-    } else if (choice == 3) {
-        cout << "Enter ID: "; cin >> id;
-        Student* s = studentList.searchById(id);
-        if (s) cout << *s << endl;
-        else cout << "Student not found." << endl;
-    } else if (choice == 4) {
-        cout << studentList; // Uses your overloaded operator<<
-    } else if (choice == 5) {
-        cout << "Total Students: " << studentList.getLength() << endl;
-    } else if (choice == 6) {
-        cout << "Enter Student ID: "; cin >> id;
-        Student* s = studentList.searchById(id);
-        if (s) {
-            cout << "Enter Course Name and Location: ";
-            cin >> cName >> loc;
-            s->addCourse(cName, loc);
-        } else cout << "Student not found." << endl;
+
+        if (choice == 7) break;
+
+        // REMOVE the try block here - it's not needed for the whole switch
+        // Instead, add try-catch blocks inside individual cases where needed
+        
+        switch(choice) {
+            case 1:
+                cout << "Enter Student ID: ";
+                cin >> id;
+                cout << "Enter Student Name: ";
+                cin.ignore();
+                getline(cin, name);
+                cout << "Enter GPA: ";
+                cin >> gpa;
+                try {
+                    studentList.append(Student(id, name, gpa));
+                    cout << "Student added successfully.\n";
+                } catch(const exception& e) {
+                    cout << "Error adding student: " << e.what() << endl;
+                }
+                break;
+            
+            case 2:
+                cout << "Enter Student to remove by ID: ";
+                cin >> id;
+                try {
+                    studentList.remove(id);  // Assuming remove() takes ID now
+                    cout << "Student removed successfully.\n";
+                } catch(const exception& e) {
+                    cout << "Error removing student: " << e.what() << endl;
+                }
+                break;
+
+            case 3:
+                cout << "Enter Student ID to search: ";
+                cin >> id;
+                try {
+                    Student* found = studentList.searchById(id);
+                    if (found) {
+                        found->display();
+                    } else {
+                        cout << "Student not found.\n";
+                    }
+                } catch(const exception& e) {
+                    cout << "Error searching for student: " << e.what() << endl;
+                }
+                break;
+                
+            case 4:
+                cout << "\n--- All Students ---\n";
+                if (studentList.isEmpty()) {
+                    cout << "No students in the list.\n";
+                } else {
+                    cout << studentList;  // Uses the overloaded << operator
+                }
+                break;
+                
+            case 5:
+                cout << "Total students: " << studentList.getLength() << endl;
+                break;
+                
+            case 6:
+                cout << "Enter Student ID to add course to: ";
+                cin >> id;
+                cout << "Enter Course Name: ";
+                cin.ignore();
+                getline(cin, cName);
+                cout << "Enter Location: ";
+                cin >> loc;
+                try {
+                    Student* found = studentList.searchById(id);
+                    if (found) {
+                        found->addCourse(cName, loc);
+                        cout << "Course added successfully.\n";
+                    } else {
+                        cout << "Student not found.\n";
+                    }
+                } catch(const exception& e) {
+                    cout << "Error adding course: " << e.what() << endl;
+                }
+                break;
+                
+            default:
+                cout << "Invalid choice. Please enter 1-7.\n";
+                break;
+        }
     }
-} catch (const exception& e) {
-    cout << "Error: " << e.what() << endl;
-}
-}
+
+
+
+
+
+  
 return 0;
 };
     
