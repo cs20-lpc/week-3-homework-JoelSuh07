@@ -63,7 +63,7 @@ int main()
                 cout << "Enter Student to remove by ID: ";
                 cin >> id;
                 try {
-                    studentList.remove(id);  // Assuming remove() takes ID now
+                    studentList.removeById(id); 
                     cout << "Student removed successfully.\n";
                 } catch(const exception& e) {
                     cout << "Error removing student: " << e.what() << endl;
